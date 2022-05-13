@@ -4,14 +4,14 @@ class Colaborador
 {
     public $codigo;
     public $nome;
-    public $morada;
+    public $codMorada;
     public $contacto;
     public $nif;
 
-    public function __construct(string $nome, Morada $morada, string $contacto, string $nif)
+    public function __construct(string $nome, int $codMorada, string $contacto, string $nif)
     {
         $this->nome = $nome;
-        $this->morada = $morada;
+        $this->morada = $codMorada;
         $this->contacto = $contacto;
         $this->nif = $nif;
     }

@@ -7,6 +7,7 @@ class Morada
     public $codigoPostal;
     public $cidade;
     public $pais;
+    public $codigo;
 
     public function __construct(string $rua, string $porta, string $codigoPostal, 
         string $cidade, string $pais)
@@ -20,17 +21,18 @@ class Morada
 
     public function exportar(): string
     {
-        return $this->rua . "." . $this->porta . "." . $this->codigoPostal
-            . "." . $this->cidade . "." . $this->pais;
+        return $this->codigo . ";" . $this->rua . ";" . $this->porta . ";" . $this->codigoPostal
+            . ";" . $this->cidade . ";" . $this->pais;
     }
 
     public function importar(string $morada)
     {
-        $elementos = explode(".", $morada);
-        $this->rua = $elementos[0];
-        $this->porta = $elementos[1];
-        $this->codigoPostal = $elementos[2];
-        $this->cidade = $elementos[3];
-        $this->pais = $elementos[4];
+        $elementos = explode(";", $morada);
+        $this->codigo = $elementos[0];
+        $this->rua = $elementos[1];
+        $this->porta = $elementos[2];
+        $this->codigoPostal = $elementos[3];
+        $this->cidade = $elementos[4];
+        $this->pais = $elementos[5];
     }
 }
