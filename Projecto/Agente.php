@@ -31,4 +31,10 @@ class Agente extends Colaborador
         $this->dataInicio = $elementos[5];
     }
 
+    public function toString(): string
+    {
+        return parent::toString()
+            . "\tData de Inicio: " . $this->dataInicio . "\n"; 
+
+    }
 }

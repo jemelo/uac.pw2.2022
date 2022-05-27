@@ -8,7 +8,7 @@ class Colaborador
     public $contacto;
     public $nif;
 
-    public function __construct(string $nome, int $codMorada, string $contacto, string $nif)
+    public function __construct(string $nome, string $codMorada, string $contacto, string $nif)
     {
         $this->nome = $nome;
         $this->morada = $codMorada;
@@ -16,6 +16,34 @@ class Colaborador
         $this->nif = $nif;
     }
 
-    // o resto das coisas
+    
+    public function toString(): string
+    {
+        return "Nome:" . $this->nome . "\n\tMorada: " . $this->morada . "\n\tContacto: "
+             . $this->contacto . "\n\tNif: " . $this->nif . "\n"; 
 
+  
+    }
+
+
+
+    /**
+     * Get the value of codigo
+     */ 
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * Set the value of codigo
+     *
+     * @return  self
+     */ 
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
 }

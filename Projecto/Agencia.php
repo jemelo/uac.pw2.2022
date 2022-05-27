@@ -6,6 +6,11 @@ require_once 'Modelo.php';
 
 class Agencia
 {
+    /**
+     * lista de modelos da agencia
+     *
+     * @var array
+     */
     public $modelos;
     public $agentes;
     public $fotografos;
@@ -20,6 +25,12 @@ class Agencia
         $this->trabalhos = [];        
     }
 
+    /**
+     * Adiciona um modelo à agencia
+     *
+     * @param Modelo $modelo
+     * @return bool true em caso de sucesso falso em caso de erro
+     */
     public function adicionarModelo(Modelo $modelo)
     {
         $this->modelos[] = $modelo;

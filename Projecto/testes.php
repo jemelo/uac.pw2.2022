@@ -29,5 +29,12 @@ $modelo = new Modelo('Roberta', $morada2->codigo, '123', '999000', 'Feminino',
     'Italiana', 1.75, 1, 2, 3, 1);
 $agencia->adicionarModelo($modelo);
 
-
 $agencia->exportar();
+
+
+$agencia->modelos;
+
+$colaborador = new Colaborador("jose", "principal", "123", "341");
+
+echo $agente->toString();
+echo $modelo->toString();

@@ -54,4 +54,8 @@ class Modelo extends Colaborador
         $this->codMorada = $elementos[11];
     }
 
+    public function toString(): string
+    {
+        return "do modelo\n";
+    }
 }
