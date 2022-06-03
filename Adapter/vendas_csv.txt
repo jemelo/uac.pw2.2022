@@ -1,0 +1,5 @@
+apple;10
+orange;15
+banana;25
+mango;30
+grape; 50
