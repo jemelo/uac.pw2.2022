@@ -33,21 +33,26 @@
     </div>
 
 
-    
+<?php
+    require_once 'Vendas.php';
+    require_once 'Compras.php';
 
-    
+    $vendas = new Vendas();
+    $compras = new Compras();
+?>
+
 <script>
 
     window.onload = function () {
 	    var chart = new CanvasJS.Chart("compras", {
 		title:{
-			text: "Compras 2020"              
+			text: "Vendas 2020"              
 		},
 		data: [              
 		{
 			// Change type to "doughnut", "line", "splineArea", etc.
 			type: "column",
-			dataPoints: <?php $file = fopen('vendas.txt', 'r'); echo fread($file, 1000);?>
+			dataPoints: <?php echo $vendas->getVendas();?>
 		}
 		]
 	});
@@ -55,7 +60,7 @@
     var chart2 = new CanvasJS.Chart("vendas",
 	{
 		title:{
-			text: "Vendas 2020"
+			text: "Compras 2020"
 		},
 		legend: {
 			maxWidth: 350,
@@ -66,15 +71,7 @@
 			type: "pie",
 			showInLegend: true,
 			legendText: "{indexLabel}",
-			dataPoints: [
-				{ y: 4181563, indexLabel: "PlayStation 3" },
-				{ y: 2175498, indexLabel: "Wii" },
-				{ y: 3125844, indexLabel: "Xbox 360" },
-				{ y: 1176121, indexLabel: "Nintendo DS"},
-				{ y: 1727161, indexLabel: "PSP" },
-				{ y: 4303364, indexLabel: "Nintendo 3DS"},
-				{ y: 1717786, indexLabel: "PS Vita"}
-			]
+			dataPoints: <?php echo $compras->getCompras();?>
 		}
 		]
 	});
