@@ -5,8 +5,8 @@
     $nifCliente = $_POST['nifCliente'];
 
     $servername = "localhost";
-    $username = "root";
-    $password = "root";
+    $username = "uac";
+    $password = "testes";
     $database = "Empresa";
 
     // Create connection
