@@ -55,9 +55,23 @@ class Fotografo implements Databaseable
         }
     }
 
-    public function search(string $search): array
+    public static function search(array $colunas, array $operadores, array $valores): array
     {
-        return [];
+        $table = strtolower(get_class()); 
+        $connection = MyConnect::getInstance();
+        //var_dump($connection->query("show tables;"));
+
+        $sql = "select * from " . $table . " where ";
+        foreach ($colunas as $i => $coluna) {
+            $sql .= $coluna . " " . $operadores[$i] . " '". $valores[$i] . "' ";
+
+            if ($i < count($colunas) - 1) {
+                $sql .= " and ";
+            }
+        }
+
+        echo $sql;
+        exit;
     }
 
     /**

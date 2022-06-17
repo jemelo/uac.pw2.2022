@@ -4,6 +4,6 @@ interface Databaseable
 {
     public function save(): bool;
     public static function get(int $id): Databaseable;
-    public function search(string $search): array;
+    public static function search(array $colunas, array $operadores, array $valores): array;
     // public function update() bool;
 }

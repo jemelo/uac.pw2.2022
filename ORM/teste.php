@@ -16,3 +16,6 @@ if ($fotografo->save()) {
 $f = Fotografo::get(2);
 var_dump($f);
 
+
+
+$fotografos = Fotografo::search(['nome', 'nif'], ['=', '!='], ['jose', '123']);
