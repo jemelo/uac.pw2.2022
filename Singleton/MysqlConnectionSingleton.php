@@ -20,6 +20,4 @@ class MysqlConnectionSingleton
 
         return self::$connection;
     }
-
-    
 }

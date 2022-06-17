@@ -1,0 +1,4 @@
+jose||123joao||123antonio||123manuel||123jose|rua|123joao|rua|123antonio|rua|123manuel|rua|123jose|rua|123
+joao|rua|123
+antonio|rua|123
+manuel|rua|123
