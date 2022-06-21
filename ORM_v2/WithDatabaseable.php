@@ -64,7 +64,10 @@ trait WithDatabaseable
         $table = strtolower(get_class()); 
         $connection = MyConnect::getInstance();
 
-        $sql = "select * from " . $table . " where ";
+        $sql = "select * from " . $table;
+        if (count($colunas) > 0) {
+            $sql .=  " where ";
+        }
         foreach ($colunas as $i => $coluna) {
             $sql .= $coluna . " " . $operadores[$i] . " '". $valores[$i] . "' ";
 
@@ -73,8 +76,28 @@ trait WithDatabaseable
             }
         }
 
-        
-       
+        $results = $connection->query($sql);
+        if ($results->num_rows == 0) {
+            return [];
+        }
+
+
+        $class = get_class();
+        $properties = get_class_vars(get_class());
+        $properties = array_keys($properties);
+        $objects = [];
+        while($row = $results->fetch_assoc()){
+            $objects[] = new $class($row);
+            
+        }
+
+        return $objects;
+    }
+
+
+    public function delete(int $id): bool
+    {
+        return false;
     }
 
     // fazer o método update
@@ -99,4 +122,6 @@ trait WithDatabaseable
 
         return $this;
     }
+
+
 }

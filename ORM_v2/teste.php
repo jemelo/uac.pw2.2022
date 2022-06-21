@@ -6,9 +6,9 @@ require_once('Databaseable.php');
 require_once('Fotografo.php');
 require_once('Agente.php');
 
-$fotografo = new Fotografo("josé", 'Rua direita', '999999990');
+$fotografo = new Fotografo(['nome' => 'jose', 'morada' => 'a rua', 'nif' => '1234']);
 //var_dump($fotografo);
-
+//exit;
 
 if ($fotografo->save()) {
     echo "Fotografo gravado com id: " . $fotografo->getId() . "\n";
@@ -16,11 +16,15 @@ if ($fotografo->save()) {
     echo "Ocorreu um erro a gravar o fotografo\n";
 }
 
-$agente = new Agente('excesso de velocidade', 'hoje');
+$agente = new Agente(['multa' => 'Falta de educaçºao', 'data' => 'hoje']);
 if ($agente->save()) {
     echo "Agente gravado com id: " . $agente->getId() . "\n";
 } else {
     echo "Ocorreu um erro a gravar o agente\n";
 }
 
-$fotografo->search(['nome', 'nif'], ['!=', 'like'], ['antonio', '%bana%']);
+$resultados =$fotografo->search(['nome', 'nif'], ['!=', 'like'], ['antonio', '%9%']);
+print_r($resultados);
+
+$resultados =$agente->search([], [], []);
+print_r($resultados);

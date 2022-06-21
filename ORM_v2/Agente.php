@@ -8,9 +8,13 @@ class Agente implements Databaseable
     protected $multa;
     protected $data;
 
-    public function __construct(string $multa, string $data)
+    public function __construct(array $parameters)
     {
-        $this->multa = $multa;
-        $this->data = $data;
+        $properties = array_keys(get_class_vars(get_class()));
+        foreach ($parameters as $key => $parameter) {
+            if (in_array($key, $properties)) {
+                $this->{$key} = $parameter;
+            }
+        }    
     }
 }
