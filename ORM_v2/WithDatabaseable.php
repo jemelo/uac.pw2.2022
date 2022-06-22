@@ -2,6 +2,12 @@
 
 trait WithDatabaseable
 {
+    /**
+     * Devolve o object pesquisando por id na tabela 
+     *
+     * @param integer $id
+     * @return Databaseable
+     */
     public static function get(int $id): Databaseable
     {
         $table = strtolower(get_class());
@@ -15,11 +21,14 @@ trait WithDatabaseable
 
         $row = $result->fetch_assoc();
         $class = get_class();
-        $f = new $class($row['nome'], $row['morada'], $row['nif']);
-        $f->setId($row['id']);
-        return $f;
+        return new $class($row);
     }
 
+    /**
+     * insere o objecto na base de dados
+     *
+     * @return boolean
+     */
     public function save(): bool
     {
         $table = strtolower(get_class()); 
@@ -59,6 +68,14 @@ trait WithDatabaseable
         }
     }
 
+    /**
+     * Pesquisa na tabela por elementos
+     *
+     * @param array $colunas
+     * @param array $operadores
+     * @param array $valores
+     * @return array
+     */
     public static function search(array $colunas, array $operadores, array $valores): array
     {
         $table = strtolower(get_class()); 
@@ -95,33 +112,48 @@ trait WithDatabaseable
     }
 
 
+    /**
+     * Delete row by id
+     *
+     * @param integer $id
+     * @return boolean
+     */
     public function delete(int $id): bool
     {
-        return false;
-    }
+        $table = strtolower(get_class());
+        $connection = MyConnect::getInstance();
 
-    // fazer o método update
-    // incluir o getid e o setid e meter isto
+        $sql = "delete from " . $table . " where id = " . $id;
+        $result = $connection->query($sql);
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
+        return $result === false ? false : true;
     }
 
     /**
-     * Set the value of id
+     * Actualiza os dados do objecto em base de dados
      *
-     * @return  self
-     */ 
-    public function setId($id)
+     * @return boolean
+     */
+    public function update(): bool
     {
-        $this->id = $id;
+        $table = strtolower(get_class()); 
+        $connection = MyConnect::getInstance();
+        
+        // construir a query para actualizar este objecto
+        $sql = "update " . $table . " set ";
 
-        return $this;
+        $properties = get_class_vars(get_class());
+        $properties = array_keys($properties);
+        foreach ($properties as $i => $property) {
+            $sql .= $property . " = '" . $this->{$property} . "'";
+
+            if ($i < count($properties)-1) {
+                $sql .= ", ";
+            }
+        }
+        $sql .= " where id = " . $this->id;
+
+        $ret = $connection->query($sql);
+        return $ret === false ? false : true;
     }
-
-
 }

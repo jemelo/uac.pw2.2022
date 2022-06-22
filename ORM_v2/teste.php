@@ -24,7 +24,14 @@ if ($agente->save()) {
 }
 
 $resultados =$fotografo->search(['nome', 'nif'], ['!=', 'like'], ['antonio', '%9%']);
-print_r($resultados);
+//print_r($resultados);
 
-$resultados =$agente->search([], [], []);
-print_r($resultados);
+$resultados_agente = $agente->search([], [], []);
+//print_r($resultados);
+
+$resultados_agente[0]->setMulta('Teste cena alterada');
+if ($resultados_agente[0]->update()) {
+    echo "Agente alterado com sucesso\n";
+} else {
+    echo "Ocorreu um erro a alterar o agente\n";
+}
