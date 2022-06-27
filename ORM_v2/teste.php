@@ -26,8 +26,8 @@ if ($agente->save()) {
 $resultados =$fotografo->search(['nome', 'nif'], ['!=', 'like'], ['antonio', '%9%']);
 //print_r($resultados);
 
-$resultados_agente = $agente->search([], [], []);
-//print_r($resultados);
+$resultados_agente = Agente::search([], [], []);
+print_r($resultados_agente);
 
 $resultados_agente[0]->setMulta('Teste cena alterada');
 if ($resultados_agente[0]->update()) {

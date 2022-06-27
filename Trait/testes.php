@@ -20,3 +20,6 @@ var_dump($agente);
 
 $fotografo->print() ;
 $agente->print();
+
+$fotografos = Fotografo::search([],[],[]);
+print_r($fotografos);

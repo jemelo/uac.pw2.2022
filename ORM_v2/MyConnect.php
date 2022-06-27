@@ -18,7 +18,9 @@ class MyConnect
 		$this->pass = $pass;
 		$this->dbname = $dbname;
 
-		$this->conn = \mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
+		//$this->conn = \mysqli_connect($this->host, $this->user, $this->pass, $this->dbname);
+			$this->conn = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->user, $this->pass);
+			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
 	public static function getInstance($host = 'localhost', $user = 'uac', $pass = 'testes', $dbname = 'agencia')
@@ -32,11 +34,14 @@ class MyConnect
 
 	public function query(string $sql)
 	{
-		return $this->conn->query($sql);
+		//return $this->conn->query($sql);
+		$stmt = $this->conn->prepare($sql);
+		$stmt->execute();
+		return $stmt;
 	}
 
 	public function getInsertID()
 	{
-		return $this->conn->insert_id;
+		return $this->conn->lastInsertId();
 	}
 }
